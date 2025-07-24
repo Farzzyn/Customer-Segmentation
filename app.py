@@ -11,7 +11,7 @@ if uploaded_file:
 
     features = st.multiselect("Select features for clustering", df.columns)
     if features:
-           features = st.multiselect("Select features for clustering", df.select_dtypes(include=[np.number]).columns)
+       features = st.multiselect("Select features for clustering", df.select_dtypes(include=[np.number]).columns)
 
     if features:
         X = df[features]
