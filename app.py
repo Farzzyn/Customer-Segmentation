@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
-st.set_page_config(page_title="Customer Segmentation App")
+st.set_page_config(page_title="🧠Customer Segmentation ")
 
 st.title("Customer Segmentation App")
 
