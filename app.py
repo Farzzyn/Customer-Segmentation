@@ -11,6 +11,19 @@ if uploaded_file:
 
     features = st.multiselect("Select features for clustering", df.columns)
     if features:
+        selected_features = st.multiselect("Select features for clustering", df.select_dtypes(include=[np.number]).columns)
+
+if selected_features:
+    X = df[selected_features]
+    st.write("Selected data:")
+    st.write(X)
+    
+    if not X.empty:
+        X_scaled = StandardScaler().fit_transform(X)
+        st.write("Scaled data:")
+        st.write(X_scaled)
+    else:
+        st.error("Selected data is empty. Please check your selections.")
         X = df[features].dropna()
         X_scaled = StandardScaler().fit_transform(X)
 
