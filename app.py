@@ -11,10 +11,10 @@ if uploaded_file:
 
     features = st.multiselect("Select features for clustering", df.columns)
     if features:
-        selected_features = st.multiselect("Select features for clustering", df.select_dtypes(include=[np.number]).columns)
+           features = st.multiselect("Select features for clustering", df.select_dtypes(include=[np.number]).columns)
 
     if features:
-        X = df[selected_features]
+        X = df[features]
         st.write("Selected data:")
         st.write(X)
         
