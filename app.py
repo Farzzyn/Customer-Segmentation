@@ -1,41 +1,46 @@
-import pandas as pd
 import streamlit as st
-from sklearn.preprocessing import StandardScaler
-st.title("🧠 Customer Segmentation ")
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 
-uploaded_file = st.file_uploader("Upload customer data CSV", type=["csv"])
+st.set_page_config(page_title="Customer Segmentation App")
 
-if uploaded_file:
+st.title("Customer Segmentation App")
+
+# File uploader
+uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
+
+if uploaded_file is not None:
+    # Read CSV
     df = pd.read_csv(uploaded_file)
+    st.subheader("Preview of Data")
     st.write(df.head())
 
-    features = st.multiselect("Select features for clustering", df.columns)
-    if features:
-       features = st.multiselect("Select features for clustering", df.select_dtypes(include=[np.number]).columns)
+    # Feature selection
+    st.subheader("Select features for clustering")
+    features = st.multiselect("Choose columns", df.columns)
 
     if features:
-        X = df[features]
-        st.write("Selected data:")
-        st.write(X)
-        
-        if not X.empty:
-            X_scaled = StandardScaler().fit_transform(X)
-            st.write("Scaled data:")
-            st.write(X_scaled)
-        else:
-            st.error("Selected data is empty. Please check your selections.")
-            X = df[features].dropna()
-            X_scaled = StandardScaler().fit_transform(X)
+        X = df[features].copy()
 
-        k = st.slider("Number of clusters", 2, 10, 4)
-        kmeans = KMeans(n_clusters=k, random_state=42).fit(X_scaled)
-        df["Cluster"] = kmeans.labels_
+        # Encode categorical columns
+        for col in X.select_dtypes(include='object').columns:
+            le = LabelEncoder()
+            X[col] = le.fit_transform(X[col])
 
-        pca = PCA(n_components=2)
-        pcs = pca.fit_transform(X_scaled)
+        st.write("Selected Data (After Encoding if needed):")
+        st.write(X.head())
 
-        fig, ax = plt.subplots()
-        sns.scatterplot(x=pcs[:, 0], y=pcs[:, 1], hue=df["Cluster"], palette="Set2", ax=ax)
-        st.pyplot(fig)
+        # Check for numeric data and scale
+        try:
+            scaler = StandardScaler()
+            X_scaled = scaler.fit_transform(X)
 
-        st.download_button("Download Segmented Data", df.to_csv(index=False), "segmented_customers.csv")
+            st.subheader("Scaled Data")
+            st.write(pd.DataFrame(X_scaled, columns=X.columns).head())
+        except Exception as e:
+            st.error(f"Error during scaling: {e}")
+    else:
+        st.info("Please select at least one feature for clustering.")
+else:
+    st.info("Please upload a CSV file to begin.")
