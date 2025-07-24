@@ -1,9 +1,11 @@
 🎯 Customer Segmentation with Marketing Campaign Data
+------------------------------------------------------
 This project applies unsupervised machine learning techniques (mainly K-Means Clustering) to segment customers based on their demographics and purchasing behavior using a marketing campaign dataset.
 -------------------------------------------
 App link: [farzzyn/customer-segmentation/main/app.py](https://customer-segmentation-epd86u6yjxiwrudzfjdfyn.streamlit.app/#scaled-data)
 
 📁 Dataset Overview
+-----------------------------------------------------------
 The dataset marketing_campaign.csv contains customer data collected during a direct marketing campaign. Key fields include:
 
 ID – Unique identifier for each customer
@@ -19,6 +21,7 @@ MntWines, MntFruits, MntMeatProducts, etc.
 NumDealsPurchases, Recency, AcceptedCmp1–5, Response
 
 🧪 Project Workflow
+---------------------------------------------
 Data Preprocessing:
 
 Handling missing values
