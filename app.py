@@ -1,5 +1,5 @@
-
-st.title("Customer Segmentation App")
+import streamlit as st
+st.title("Customer Segmentation ")
 
 uploaded_file = st.file_uploader("Upload customer data CSV", type=["csv"])
 
