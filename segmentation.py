@@ -16,7 +16,7 @@ total_spending = st.number_input("Total spending (sum of purchases)",min_value =
 num_web_purchases = st.number_input("Number of Web purchases", min_value = 0, max_value = 100, value = 10)
 num_store_purchases =st.number_input("num store purchases", min_value = 0, max_value =100, value = 10)
 num_web_visits = st.number_input("Number of visits per month", min_value = 0, max_value =50, value = 3 )
-recency =st.number_input("Recency(days since last purchases)", min_value = 0, max_values = 365, value = 30)
+recency =st.number_input("Recency(days since last purchases)", min_value = 0, max_value = 365, value = 30)
 
 
 input_data = pd.DataFrame({
@@ -42,4 +42,5 @@ if st.button("Predict Segment"):
     #          Cluster 0 : High budget, web visiters
     #          Cluster 1 : High spending
     #          cluster 2 : Web visitors
+
     #          """)
