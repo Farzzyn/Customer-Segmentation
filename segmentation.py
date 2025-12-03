@@ -5,7 +5,7 @@ import joblib
 
 
 kmeans = joblib.load("kmeans_model.pkl")
-scaler = joblib.load("scaler.pkl")
+scaler = joblib.load("scaler_model.pkl")
 
 st.title("Customer Segmentation App")
 st.write("Enter customer details to predict the segmentation.")
@@ -44,3 +44,4 @@ if st.button("Predict Segment"):
     #          cluster 2 : Web visitors
 
     #          """)
+
